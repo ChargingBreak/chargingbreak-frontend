@@ -1,7 +1,7 @@
 <template>
   <div>
     <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" :class="{ minimized: typeof selectedCharger === 'object' }" />
-    <Charger v-if="selectedCharger" :details="selectedCharger" />
+    <Charger v-if="selectedCharger" :details="selectedCharger" :users="users" />
   </div>
 </template>
 
@@ -39,6 +39,7 @@ export default {
   computed: {
     ...mapState({
       chargers: state => state.chargers.all,
+      users: state => state.users.all,
       selectedCharger: (state) => {
         if (state.chargers.selectedChargerId) {
           const charger = _.find(state.chargers.all, item => item.id === state.chargers.selectedChargerId);

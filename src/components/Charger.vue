@@ -5,7 +5,10 @@
     <h2>Date opened: {{ details.charger.dateOpened }}</h2>
 
     <ul v-for="review in details.reviews" class="list-group">
-      <li class="list-group-item">{{ review.description }}</li>
+      <li class="list-group-item">
+        <b-img :src="getUser(review.userId).photoUrl" rounded width="75" height="75" alt="img" class="m-1" />
+        {{ review.description }}
+      </li>
     </ul>
   </div>
 </template>
@@ -17,14 +20,22 @@
 </style>
 
 <script>
+import _ from 'lodash';
+
 export default {
   props: {
     details: Object,
+    users: Array,
   },
   data() {
     return {
 
     };
+  },
+  methods: {
+    getUser(userId) {
+      return _.find(this.users, user => user.id === userId);
+    }
   },
 };
 </script>
