@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-Install Node.js dependencies via npm after cloning the repository:
+Install JavaScript dependencies via npm after cloning the repository:
 
 ```
 npm install
