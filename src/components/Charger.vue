@@ -1,9 +1,12 @@
 <template>
   <div class="container">
-    <img src="/img/charger.png" alt="Charger" />
-    <h1>{{ details.name }}</h1>
-    <h2>Stalls: {{ details.stallCount }}</h2>
-    <h2>Date opened: {{ details.dateOpened }}</h2>
+    <h1><img src="/img/charger.png" alt="Charger" /> {{ details.charger.name }}</h1>
+    <h2>Stalls: {{ details.charger.stallCount }}</h2>
+    <h2>Date opened: {{ details.charger.dateOpened }}</h2>
+
+    <ul v-for="review in details.reviews" class="list-group">
+      <li class="list-group-item">{{ review.description }}</li>
+    </ul>
   </div>
 </template>
 

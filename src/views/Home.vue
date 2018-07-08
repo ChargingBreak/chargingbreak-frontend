@@ -39,15 +39,27 @@ export default {
   computed: {
     ...mapState({
       chargers: state => state.chargers.all,
-      selectedCharger: state => _.find(state.chargers.all, charger => charger.id === state.chargers.selectedChargerId),
+      selectedCharger: (state) => {
+        if (state.chargers.selectedChargerId) {
+          const charger = _.find(state.chargers.all, item => item.id === state.chargers.selectedChargerId);
+          const reviews = state.reviews.all.filter(item => item.chargerId === state.chargers.selectedChargerId);
+
+          return {
+            charger,
+            reviews,
+          };
+        }
+      },
     }),
   },
   created() {
     this.$store.dispatch('chargers/getAllChargers');
+    this.$store.dispatch('users/getAllUsers');
   },
   methods: {
     onChargerClicked(chargerId) {
       this.$store.dispatch('chargers/setSelectedCharger', { id: chargerId });
+      this.$store.dispatch('reviews/getReviewsForCharger', { id: chargerId });
     },
   },
 };
