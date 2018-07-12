@@ -18,9 +18,10 @@
   width: 256px !important;
   height: 256px !important;
 
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
+  z-index: 1000;
 }
 </style>
 
