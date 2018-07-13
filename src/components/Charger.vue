@@ -1,40 +1,55 @@
 <template>
-  <div class="container-fluid">
-    <h1 class="display-3">{{ details.charger.name }}</h1>
+  <div class="wrapper">
+    <h3 class="display-3 mt-2 mb-4">{{ details.charger.name }}</h3>
 
-    <div class="row my-4">
-      <div class="col-md-6">
-        <div class="card bg-light stalls">
-          <div class="card-body">
-            <h2><simple-svg v-for="n in details.charger.stallCount" filepath="/img/symbols/supercharger.svg" /> <span class="badge">{{ details.charger.stallCount }} stalls</span></h2>
-          </div>
+    <nav class="navbar navbar-dark bg-primary mb-2">
+      <span class="navbar-brand mb-0 h1">Details</span>
+    </nav>
+
+    <div class="card-deck text-center">
+      <div class="card bg-light stalls">
+        <div class="card-body">
+          <h2><simple-svg v-for="n in details.charger.stallCount" filepath="/img/symbols/supercharger.svg" /> <span class="badge">{{ details.charger.stallCount }} stalls</span></h2>
         </div>
       </div>
 
-      <div class="col-md-6 text-right">
+      <div class="card p-3 bg-light">
         <p class="lead text-muted">
           Opened {{ formatDuration(details.charger.dateOpened) }}<br />
+        </p>
+      </div>
+
+      <div class="card p-3 bg-light">
+        <p class="lead text-muted">
           No parking fees
         </p>
       </div>
     </div>
 
-    <div class="card-deck ratings my-4">
-      <div v-for="rating in ratings" class="card text-center">
-        <div class="card-body">
-          <simple-svg filepath="/img/symbols/ratings.svg" :class="'rating-' + rating.rating" />
+    <nav class="navbar navbar-dark bg-primary mt-4 mb-2">
+      <span class="navbar-brand mb-0 h1">Ratings</span>
+    </nav>
+
+    <div class="card-deck ratings">
+      <div v-for="rating in ratings" class="card border-light text-center">
+        <div class="card-body px-0 py-2">
+          <simple-svg filepath="/img/symbols/ratings.svg" :class="'rating-' + rating.rating + ' mx-4'" />
           
           <img :src="'/img/symbols/' + rating.theme.toLowerCase() + '.svg'" :alt="rating.theme.toLowerCase()" />
 
-          <h4 class="card-title">
+          <strong>
             {{ rating.theme.toLowerCase() }}
-          </h4>
+          </strong>
         </div>
       </div>
     </div>
 
+    <nav class="navbar navbar-dark bg-primary mt-4 mb-2">
+      <span class="navbar-brand mb-0 h1">Tips</span>
+    </nav>
+
     <div class="row tips">
-      <div class="col-sm-6 col-md-3" v-for="tip in tips">
+      <div class="col-md-6" v-for="tip in tips">
         <div class="card">
           <img v-if="tip.photoUrl" class="card-img-top" :src="tip.photoUrl" alt="Photo">
           <div class="card-body">
@@ -69,6 +84,10 @@
 </template>
 
 <style>
+.wrapper {
+  margin: 0 20px;
+}
+
 .stalls .simple-svg {
   height: 32px;
   position: relative;
@@ -79,15 +98,15 @@
   display: inline-block;
 }
 
-.ratings .card-body svg {
-  width: 70%;
-}
-
 .ratings .card-body img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 128px;
+}
+
+.ratings strong {
+  text-transform: capitalize;
 }
 
 .ratings .simple-svg-wrapper.rating-1 #rating_2, .ratings .simple-svg-wrapper.rating-1 #rating_3, .ratings .simple-svg-wrapper.rating-1 #rating_4, .ratings .simple-svg-wrapper.rating-1 #rating_5 {
@@ -108,10 +127,6 @@
 
 .ratings .simple-svg-wrapper.rating-5 #rating_1, .ratings .simple-svg-wrapper.rating-5 #rating_2, .ratings .simple-svg-wrapper.rating-5 #rating_3, .ratings .simple-svg-wrapper.rating-5 #rating_4 {
   display: none;
-}
-
-.ratings .card-title {
-  text-transform: capitalize;
 }
 
 .upvote svg {

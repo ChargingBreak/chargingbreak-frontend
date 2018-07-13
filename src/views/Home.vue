@@ -1,27 +1,31 @@
 <template>
   <div>
-    <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" :class="{ minimized: typeof selectedCharger === 'object' }" />
-    <Charger v-if="selectedCharger" :details="selectedCharger" :users="users" />
+    <div class="row">
+      <div :class="'col-md-' + (selectedCharger ? 6 : 12)">
+        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" :class="{ minimized: typeof selectedCharger === 'object' }" />
+      </div>
+      <div class="col-md-6" v-if="selectedCharger">
+        <Charger :details="selectedCharger" :users="users" class="charger" />
+      </div>
+    </div>
   </div>
 </template>
 
 <style>
+.charger {
+  background: white;
+}
+
 .map {
+  position: fixed;
   width: 100vw !important;
   height: 100vh !important;
-  position: relative;
 
-  transition: width 1s, height 1s, left 1s, top 1s;
+  transition: width 1s, height 1s;
 }
 
 .map.minimized {
-  width: 256px !important;
-  height: 256px !important;
-
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
+  width: 50vw !important;
 }
 </style>
 
