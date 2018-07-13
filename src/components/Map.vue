@@ -34,8 +34,9 @@ export default {
       center: L.latLng(38.911936, -77.016719),
       url: 'https://map.geocod.io/osm/{z}/{x}/{y}.png',
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-      chargerIcon: L.icon({ iconUrl: '/img/charger.png', shadowUrl: '' }),
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            ' Supercharger data graciously provided by Blueshift @ <a href="https://supercharge.info">supercharge.info</a>',
+      chargerIcon: L.icon({ iconUrl: '/img/charger.png', iconSize: [42, 56], iconAnchor: [42, 56] }),
     };
   },
 };

@@ -15,7 +15,7 @@ const stubReviews = [
     type: 'TIP',
     theme: 'ATMOSPHERE',
     description: 'Up for a little detour? Take a drive through scenic Skyline Drive, using the Front Royal entrance, about 6 miles from the Supercharger',
-    photoUrl: 'https://www.nps.gov/shen/planyourvisit/images/Skyline-Drive-late-Fall.jpg?maxwidth=1200&maxheight=1200&autorotate=false'
+    photoUrl: '/img/uploads/IMG_7666.JPG'
   },
   {
     chargerId: 632,

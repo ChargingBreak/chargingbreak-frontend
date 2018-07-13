@@ -6,23 +6,26 @@
       <span class="navbar-brand mb-0 h1">Details</span>
     </nav>
 
-    <div class="card-deck text-center">
+    <div class="card-deck details text-center">
       <div class="card bg-light stalls">
         <div class="card-body">
-          <h2><simple-svg v-for="n in details.charger.stallCount" filepath="/img/symbols/supercharger.svg" /> <span class="badge">{{ details.charger.stallCount }} stalls</span></h2>
+          <simple-svg v-for="n in details.charger.stallCount" filepath="/img/symbols/supercharger.svg" />
+          <h2><span class="badge">{{ details.charger.stallCount }} stalls</span></h2>
         </div>
       </div>
 
-      <div class="card p-3 bg-light">
-        <p class="lead text-muted">
-          Opened {{ formatDuration(details.charger.dateOpened) }}<br />
-        </p>
+      <div class="card bg-light">
+        <div class="card-body text-center">
+          <simple-svg filepath="/img/symbols/calendar.svg" />
+          <p class="mt-2">Opened {{ formatDuration(details.charger.dateOpened) }}</p>
+        </div>
       </div>
 
-      <div class="card p-3 bg-light">
-        <p class="lead text-muted">
-          No parking fees
-        </p>
+      <div class="card bg-light">
+        <div class="card-body text-center">
+          <simple-svg filepath="/img/symbols/parking.svg" />
+          <p class="mt-2">No parking fees</p>
+        </div>
       </div>
     </div>
 
@@ -48,35 +51,33 @@
       <span class="navbar-brand mb-0 h1">Tips</span>
     </nav>
 
-    <div class="row tips">
-      <div class="col-md-6" v-for="tip in tips">
-        <div class="card">
-          <img v-if="tip.photoUrl" class="card-img-top" :src="tip.photoUrl" alt="Photo">
-          <div class="card-body">
-            <div class="row mb-2">
-              <div class="col-md-8">
-                <h4 class="card-title">
-                  <img :src="'/img/symbols/' + tip.theme.toLowerCase() + '.svg'" :alt="tip.theme.toLowerCase()" />
-                  {{ tip.theme.toLowerCase() }}
-                </h4>
-              </div>
-
-              <div class="col-md-4">
-                <div class="float-right text-center">
-                  <simple-svg filepath="/img/symbols/upvote.svg" class="upvote" />
-                  <h4>2</h4>
-                </div>
-              </div>
+    <div class="card-columns tips">
+      <div class="card" v-for="tip in tips">
+        <img v-if="tip.photoUrl" class="card-img-top" :src="tip.photoUrl" alt="Photo">
+        <div class="card-body">
+          <div class="row mb-2">
+            <div class="col-md-8">
+              <h4 class="card-title">
+                <img :src="'/img/symbols/' + tip.theme.toLowerCase() + '.svg'" :alt="tip.theme.toLowerCase()" />
+                {{ tip.theme.toLowerCase() }}
+              </h4>
             </div>
 
-            <p class="card-text">{{ tip.description }}</p>
-            <p class="card-text">
-              <small class="text-muted">
-                <b-img :src="getUser(tip.userId).photoUrl" rounded width="32" height="32" alt="img" class="m-1" />
-                {{ getUser(tip.userId).name }}, 1 week ago
-              </small>
-            </p>
+            <div class="col-md-4">
+              <div class="float-right text-center">
+                <simple-svg filepath="/img/symbols/upvote.svg" class="upvote" />
+                <h4>2</h4>
+              </div>
+            </div>
           </div>
+
+          <p class="card-text">{{ tip.description }}</p>
+          <p class="card-text">
+            <small class="text-muted">
+              <b-img :src="getUser(tip.userId).photoUrl" rounded width="32" height="32" alt="img" class="m-1" />
+              {{ getUser(tip.userId).name }}, 1 week ago
+            </small>
+          </p>
         </div>
       </div>
     </div>
@@ -86,6 +87,10 @@
 <style>
 .wrapper {
   margin: 0 20px;
+}
+
+.details .simple-svg {
+  height: 32px;
 }
 
 .stalls .simple-svg {
@@ -134,7 +139,7 @@
 }
 
 .tips .card-img-top {
-  height: 320px;
+  /*height: 320px;*/
 }
 
 .tips .card-title {
