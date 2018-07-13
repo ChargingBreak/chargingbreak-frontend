@@ -45,6 +45,10 @@ export default {
   created() {
     this.$store.dispatch('chargers/getAllChargers');
     this.$store.dispatch('users/getAllUsers');
+
+    if (this.hasSelectedCharger()) {
+      this.$store.dispatch('reviews/getReviewsForCharger', { id: this.$route.params.chargerId });
+    }
   },
   methods: {
     onChargerClicked(chargerId) {
