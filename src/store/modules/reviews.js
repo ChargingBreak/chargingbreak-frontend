@@ -1,4 +1,4 @@
-//import review from '../../api/review';
+// import review from '../../api/review';
 
 const stubReviews = [
   {
@@ -7,7 +7,7 @@ const stubReviews = [
     type: 'TIP',
     theme: 'ATMOSPHERE',
     description: 'The views here are amazing',
-    photoUrl: '/img/uploads/IMG_1507.JPG'
+    photoUrl: '/img/uploads/IMG_1507.JPG',
   },
   {
     chargerId: 632,
@@ -15,7 +15,7 @@ const stubReviews = [
     type: 'TIP',
     theme: 'ATMOSPHERE',
     description: 'Up for a little detour? Take a drive through scenic Skyline Drive, using the Front Royal entrance, about 6 miles from the Supercharger',
-    photoUrl: '/img/uploads/IMG_7666.JPG'
+    photoUrl: '/img/uploads/IMG_7666.JPG',
   },
   {
     chargerId: 632,
@@ -23,42 +23,42 @@ const stubReviews = [
     type: 'TIP',
     theme: 'FOOD',
     description: 'If Burger King isn\'t your thing, call Little Anthony\'s Pizza, and pick up your order on the way to the Supercharger (it\'s right around the corner)',
-    photoUrl: 'https://lh3.ggpht.com/p/AF1QipPUpgIgqbOXSziYf_D_iMZhWOwsYarml0TShqKM=s512'
+    photoUrl: 'https://lh3.ggpht.com/p/AF1QipPUpgIgqbOXSziYf_D_iMZhWOwsYarml0TShqKM=s512',
   },
   {
     chargerId: 632,
     userId: 1,
     type: 'RATING',
     theme: 'FOOD',
-    rating: 3
+    rating: 3,
   },
   {
     chargerId: 632,
     userId: 1,
     type: 'RATING',
     theme: 'KIDS',
-    rating: 3
+    rating: 3,
   },
   {
     chargerId: 632,
     userId: 1,
     type: 'RATING',
     theme: 'RESTROOMS',
-    rating: 3
+    rating: 3,
   },
   {
     chargerId: 632,
     userId: 1,
     type: 'RATING',
     theme: 'SHOPPING',
-    rating: 0
+    rating: 0,
   },
   {
     chargerId: 632,
     userId: 1,
     type: 'RATING',
     theme: 'ATMOSPHERE',
-    rating: 5
+    rating: 5,
   },
 ];
 
@@ -73,9 +73,9 @@ const getters = {};
 // actions
 const actions = {
   getReviewsForCharger({ commit }, args) {
-    //review.getReviewsForCharger(args.id, (reviews) => {
-      commit('setReviews', stubReviews);
-    //});
+    // review.getReviewsForCharger(args.id, (reviews) => {
+    commit('setReviews', stubReviews);
+    // });
   },
 };
 

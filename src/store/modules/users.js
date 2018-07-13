@@ -1,11 +1,11 @@
-//import user from '../../api/user';
+// import user from '../../api/user';
 
 const stubUsers = [
   {
     id: 1,
     name: 'Mathias Hansen',
-    photoUrl: 'https://i0.wp.com/wp.laravel-news.com/wp-content/uploads/2014/12/mathias.jpg'
-  }
+    photoUrl: 'https://i0.wp.com/wp.laravel-news.com/wp-content/uploads/2014/12/mathias.jpg',
+  },
 ];
 
 // initial state
@@ -19,9 +19,9 @@ const getters = {};
 // actions
 const actions = {
   getAllUsers({ commit }) {
-    //user.getUsers((users) => {
-      commit('setUsers', stubUsers);
-    //});
+    // user.getUsers((users) => {
+    commit('setUsers', stubUsers);
+    // });
   },
 };
 

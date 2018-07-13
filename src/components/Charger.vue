@@ -11,7 +11,11 @@
     <div class="card-deck details text-center">
       <div class="card bg-light stalls">
         <div class="card-body">
-          <simple-svg v-for="n in details.stallCount" filepath="/img/symbols/supercharger.svg" />
+          <simple-svg
+            v-for="n in details.stallCount"
+            :key="n"
+            filepath="/img/symbols/supercharger.svg"
+          />
           <h2><span class="badge">{{ details.stallCount }} stalls</span></h2>
         </div>
       </div>
@@ -36,11 +40,16 @@
     </nav>
 
     <div class="card-deck ratings">
-      <div v-for="rating in ratings" class="card border-light text-center">
+      <div v-for="rating in ratings" :key="rating.id" class="card border-light text-center">
         <div class="card-body px-0 py-2">
-          <simple-svg filepath="/img/symbols/ratings.svg" :class="'rating-' + rating.rating + ' mx-4'" />
-          
-          <img :src="'/img/symbols/' + rating.theme.toLowerCase() + '.svg'" :alt="rating.theme.toLowerCase()" />
+          <simple-svg
+            filepath="/img/symbols/ratings.svg"
+            :class="'rating-' + rating.rating + ' mx-4'"
+          />
+
+          <simple-svg
+            :filepath="'/img/symbols/' + rating.theme.toLowerCase() + '.svg'"
+          />
 
           <strong>
             {{ rating.theme.toLowerCase() }}
@@ -54,15 +63,18 @@
     </nav>
 
     <div class="card-columns tips">
-      <div class="card" v-for="tip in tips">
+      <div class="card" v-for="tip in tips" :key="tip.id">
         <img v-if="tip.photoUrl" class="card-img-top" :src="tip.photoUrl" alt="Photo">
         <div class="card-body">
           <div class="row mb-2">
             <div class="col-md-8">
-              <h4 class="card-title">
-                <img :src="'/img/symbols/' + tip.theme.toLowerCase() + '.svg'" :alt="tip.theme.toLowerCase()" />
+              <h6 class="card-title">
+                <simple-svg
+                  :filepath="'/img/symbols/' + tip.theme.toLowerCase() + '.svg'"
+                  class="d-inline-block"
+                />
                 {{ tip.theme.toLowerCase() }}
-              </h4>
+              </h6>
             </div>
 
             <div class="col-md-4">
@@ -76,7 +88,14 @@
           <p class="card-text">{{ tip.description }}</p>
           <p class="card-text">
             <small class="text-muted">
-              <b-img :src="getUser(tip.userId).photoUrl" rounded width="32" height="32" alt="img" class="m-1" />
+              <b-img
+                :src="getUser(tip.userId).photoUrl"
+                rounded
+                width="32"
+                height="32"
+                alt="Photo"
+                class="m-1"
+              />
               {{ getUser(tip.userId).name }}, 1 week ago
             </small>
           </p>
@@ -116,23 +135,38 @@
   text-transform: capitalize;
 }
 
-.ratings .simple-svg-wrapper.rating-1 #rating_2, .ratings .simple-svg-wrapper.rating-1 #rating_3, .ratings .simple-svg-wrapper.rating-1 #rating_4, .ratings .simple-svg-wrapper.rating-1 #rating_5 {
+.ratings .simple-svg-wrapper.rating-1 #rating_2,
+.ratings .simple-svg-wrapper.rating-1 #rating_3,
+.ratings .simple-svg-wrapper.rating-1 #rating_4,
+.ratings .simple-svg-wrapper.rating-1 #rating_5 {
   display: none;
 }
 
-.ratings .simple-svg-wrapper.rating-2 #rating_1, .ratings .simple-svg-wrapper.rating-2 #rating_3, .ratings .simple-svg-wrapper.rating-2 #rating_4, .ratings .simple-svg-wrapper.rating-2 #rating_5 {
+.ratings .simple-svg-wrapper.rating-2 #rating_1,
+.ratings .simple-svg-wrapper.rating-2 #rating_3,
+.ratings .simple-svg-wrapper.rating-2 #rating_4,
+.ratings .simple-svg-wrapper.rating-2 #rating_5 {
   display: none;
 }
 
-.ratings .simple-svg-wrapper.rating-3 #rating_1, .ratings .simple-svg-wrapper.rating-3 #rating_2, .ratings .simple-svg-wrapper.rating-3 #rating_4, .ratings .simple-svg-wrapper.rating-3 #rating_5 {
+.ratings .simple-svg-wrapper.rating-3 #rating_1,
+.ratings .simple-svg-wrapper.rating-3 #rating_2,
+.ratings .simple-svg-wrapper.rating-3 #rating_4,
+.ratings .simple-svg-wrapper.rating-3 #rating_5 {
   display: none;
 }
 
-.ratings .simple-svg-wrapper.rating-4 #rating_1, .ratings .simple-svg-wrapper.rating-4 #rating_2, .ratings .simple-svg-wrapper.rating-4 #rating_3, .ratings .simple-svg-wrapper.rating-4 #rating_5 {
+.ratings .simple-svg-wrapper.rating-4 #rating_1,
+.ratings .simple-svg-wrapper.rating-4 #rating_2,
+.ratings .simple-svg-wrapper.rating-4 #rating_3,
+.ratings .simple-svg-wrapper.rating-4 #rating_5 {
   display: none;
 }
 
-.ratings .simple-svg-wrapper.rating-5 #rating_1, .ratings .simple-svg-wrapper.rating-5 #rating_2, .ratings .simple-svg-wrapper.rating-5 #rating_3, .ratings .simple-svg-wrapper.rating-5 #rating_4 {
+.ratings .simple-svg-wrapper.rating-5 #rating_1,
+.ratings .simple-svg-wrapper.rating-5 #rating_2,
+.ratings .simple-svg-wrapper.rating-5 #rating_3,
+.ratings .simple-svg-wrapper.rating-5 #rating_4 {
   display: none;
 }
 
@@ -142,10 +176,10 @@
 
 .tips .card-title {
   text-transform: capitalize;
-  line-height: 62px;
+  line-height: 56px;
 }
 
-.tips .card-title img {
+.tips .card-title img, .tips .card-title .simple-svg {
   height: 48px;
 }
 </style>
@@ -170,11 +204,12 @@ export default {
       return _.find(this.chargers, item => item.id === this.chargerId);
     },
     ratings() {
-      return this.reviews.filter(review => review.chargerId === this.chargerId && review.type === 'RATING');
+      return this.reviews.filter(review =>
+        review.chargerId === this.chargerId && review.type === 'RATING');
     },
     tips() {
       return this.reviews.filter(review => review.type === 'TIP');
-    }
+    },
   },
   methods: {
     getUser(userId) {
@@ -182,7 +217,7 @@ export default {
     },
     formatDuration(date) {
       return moment.duration(moment(date).diff(moment())).humanize(true);
-    }
+    },
   },
 };
 </script>

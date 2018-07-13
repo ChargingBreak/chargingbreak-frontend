@@ -2,7 +2,7 @@ import charger from '../../api/charger';
 
 // initial state
 const state = {
-  all: []
+  all: [],
 };
 
 // getters

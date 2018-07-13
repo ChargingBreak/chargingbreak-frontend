@@ -5,7 +5,14 @@
         <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" />
       </div>
       <div class="col-md-6 bg-white">
-        <Charger v-if="hasSelectedCharger()" :chargerId="parseInt($route.params.chargerId)" :users="users" :chargers="chargers" :reviews="reviews" class="charger" />
+        <Charger
+          v-if="hasSelectedCharger()"
+          :chargerId="parseInt($route.params.chargerId)"
+          :users="users"
+          :chargers="chargers"
+          :reviews="reviews"
+          class="charger"
+        />
         <About v-else />
       </div>
     </div>
@@ -23,7 +30,6 @@
 </style>
 
 <script>
-import _ from 'lodash';
 import { mapState } from 'vuex';
 import Map from '@/components/Map.vue';
 import Charger from '@/components/Charger.vue';
@@ -39,7 +45,7 @@ export default {
   computed: mapState({
     chargers: state => state.chargers.all,
     users: state => state.users.all,
-    reviews: state => state.reviews.all
+    reviews: state => state.reviews.all,
   }),
   created() {
     this.$store.dispatch('chargers/getAllChargers');
@@ -51,7 +57,7 @@ export default {
   },
   methods: {
     onChargerClicked(chargerId) {
-      this.$router.push({ path: '/charger/' + chargerId })
+      this.$router.push({ path: `/charger/${chargerId}` });
       this.$store.dispatch('reviews/getReviewsForCharger', { id: chargerId });
     },
     hasSelectedCharger() {
