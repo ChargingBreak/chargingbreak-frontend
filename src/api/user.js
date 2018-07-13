@@ -5,7 +5,7 @@ export default {
     // TODO: Error handling
     axios.get('/data/user.json')
       .then((user) => {
-        callback(user);
+        callback(user.data);
       });
   },
 };

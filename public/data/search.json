@@ -1,0 +1,51 @@
+{
+  "chargers": [
+    100,
+    632
+  ],
+  "locations": {
+    "input": {
+      "address_components": {
+        "zip": "22206",
+        "country": "US"
+      },
+      "formatted_address": "22206"
+    },
+    "results": [
+      {
+        "address_components": {
+          "city": "Arlington",
+          "county": "Arlington County",
+          "state": "VA",
+          "zip": "22206",
+          "country": "US"
+        },
+        "formatted_address": "Arlington, VA 22206",
+        "location": {
+          "lat": 38.840403,
+          "lng": -77.0888
+        },
+        "accuracy": 1,
+        "accuracy_type": "place",
+        "source": "TIGER/Line® dataset from the US Census Bureau"
+      },
+      {
+        "address_components": {
+          "city": "Shirlington",
+          "county": "Arlington County",
+          "state": "VA",
+          "zip": "22206",
+          "country": "US"
+        },
+        "formatted_address": "Shirlington, VA 22206",
+        "location": {
+          "lat": 38.841779,
+          "lng": -77.088312
+        },
+        "accuracy": 0.9,
+        "accuracy_type": "place",
+        "source": "TIGER/Line® dataset from the US Census Bureau"
+      }
+    ]
+  }
+}

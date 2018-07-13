@@ -1,29 +1,29 @@
 <template>
-  <div class="wrapper" v-if="details">
+  <div class="wrapper" v-if="chargerDetails">
     <router-link to="/">&lsaquo; Go back</router-link>
 
-    <h3 class="display-3 mt-2 mb-4">{{ details.name }}</h3>
+    <h3 class="display-3 mt-2 mb-4">{{ chargerDetails.name }}</h3>
 
     <nav class="navbar navbar-dark bg-primary mb-2">
       <span class="navbar-brand mb-0 h1">Details</span>
     </nav>
 
-    <div class="card-deck details text-center">
+    <div class="card-deck chargerDetails text-center">
       <div class="card bg-light stalls">
         <div class="card-body">
           <simple-svg
-            v-for="n in details.stallCount"
+            v-for="n in chargerDetails.stallCount"
             :key="n"
             filepath="/img/symbols/supercharger.svg"
           />
-          <h2><span class="badge">{{ details.stallCount }} stalls</span></h2>
+          <h2><span class="badge">{{ chargerDetails.stallCount }} stalls</span></h2>
         </div>
       </div>
 
       <div class="card bg-light">
         <div class="card-body text-center">
           <simple-svg filepath="/img/symbols/calendar.svg" />
-          <p class="mt-2">Opened {{ formatDuration(details.dateOpened) }}</p>
+          <p class="mt-2">Opened {{ formatDuration(chargerDetails.dateOpened) }}</p>
         </div>
       </div>
 
@@ -40,7 +40,7 @@
     </nav>
 
     <div class="card-deck ratings">
-      <div v-for="rating in ratings" :key="rating.id" class="card border-light text-center">
+      <div v-for="rating in chargerDetails.ratings" :key="rating.id" class="card border-light text-center">
         <div class="card-body px-0 py-2">
           <simple-svg
             filepath="/img/symbols/ratings.svg"
@@ -63,7 +63,7 @@
     </nav>
 
     <div class="card-columns tips">
-      <div class="card" v-for="tip in tips" :key="tip.id">
+      <div class="card" v-for="tip in chargerDetails.tips" :key="tip.id">
         <img v-if="tip.photoUrl" class="card-img-top" :src="tip.photoUrl" alt="Photo">
         <div class="card-body">
           <div class="row mb-2">
@@ -86,17 +86,17 @@
           </div>
 
           <p class="card-text">{{ tip.description }}</p>
-          <p class="card-text">
+          <p class="card-text" v-if="users[tip.userId]">
             <small class="text-muted">
               <b-img
-                :src="getUser(tip.userId).photoUrl"
+                :src="users[tip.userId].photoUrl"
                 rounded
                 width="32"
                 height="32"
                 alt="Photo"
                 class="m-1"
               />
-              {{ getUser(tip.userId).name }}, 1 week ago
+              {{ users[tip.userId].name }}, 1 week ago
             </small>
           </p>
         </div>
@@ -110,7 +110,7 @@
   margin: 0 20px;
 }
 
-.details .simple-svg {
+.chargerDetails .simple-svg {
   height: 32px;
 }
 
@@ -190,31 +190,18 @@ import moment from 'moment';
 
 export default {
   props: {
-    users: Array,
-    chargers: Array,
-    reviews: Array,
     chargerId: Number,
+    users: Object,
+    chargerDetails: Object,
   },
-  data() {
-    return {
-    };
-  },
-  computed: {
-    details() {
-      return _.find(this.chargers, item => item.id === this.chargerId);
-    },
-    ratings() {
-      return this.reviews.filter(review =>
-        review.chargerId === this.chargerId && review.type === 'RATING');
-    },
-    tips() {
-      return this.reviews.filter(review => review.type === 'TIP');
-    },
+  created() {
+    const userIds = _.union(this.chargerDetails.tips.map(tip => tip.user_id));
+
+    for (const userId in userIds) {
+      this.$store.dispatch('users/getUser', userId);
+    }
   },
   methods: {
-    getUser(userId) {
-      return _.find(this.users, user => user.id === userId);
-    },
     formatDuration(date) {
       return moment.duration(moment(date).diff(moment())).humanize(true);
     },

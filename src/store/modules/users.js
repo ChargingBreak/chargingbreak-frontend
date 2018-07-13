@@ -2,7 +2,7 @@ import user from '../../api/user';
 
 // initial state
 const state = {
-  all: [],
+  all: {},
 };
 
 // getters
@@ -11,7 +11,7 @@ const getters = {};
 // actions
 const actions = {
   getUser({ commit }, userId) {
-    user.getUsers((user) => {
+    user.getUser(userId, (user) => {
       commit('addUser', user);
     });
   },
@@ -21,7 +21,7 @@ const actions = {
 /* eslint-disable no-param-reassign, no-shadow */
 const mutations = {
   addUser(state, user) {
-    state.all.push(user);
+    state.all[user.id] = user;
   },
 };
 /* eslint-enable no-param-reassign, no-shadow */
