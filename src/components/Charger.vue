@@ -1,5 +1,7 @@
 <template>
   <div class="wrapper" v-if="details">
+    <router-link to="/">&lsaquo; Go back</router-link>
+
     <h3 class="display-3 mt-2 mb-4">{{ details.name }}</h3>
 
     <nav class="navbar navbar-dark bg-primary mb-2">

@@ -1,11 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <div :class="'col-md-' + (hasSelectedCharger() ? 6 : 12)">
-        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" :class="{ minimized: typeof hasSelectedCharger() === 'object' }" />
+      <div class="col-md-6">
+        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" />
       </div>
-      <div class="col-md-6 bg-white" v-if="hasSelectedCharger()">
-        <Charger :chargerId="parseInt($route.params.chargerId)" :users="users" :chargers="chargers" :reviews="reviews" class="charger" />
+      <div class="col-md-6 bg-white">
+        <Charger v-if="hasSelectedCharger()" :chargerId="parseInt($route.params.chargerId)" :users="users" :chargers="chargers" :reviews="reviews" class="charger" />
+        <About v-else />
       </div>
     </div>
   </div>
@@ -14,14 +15,10 @@
 <style>
 .map {
   position: fixed;
-  width: 100vw !important;
+  width: 50vw !important;
   height: 100vh !important;
 
   transition: width 1s, height 1s;
-}
-
-.map.minimized {
-  width: 50vw !important;
 }
 </style>
 
@@ -30,12 +27,14 @@ import _ from 'lodash';
 import { mapState } from 'vuex';
 import Map from '@/components/Map.vue';
 import Charger from '@/components/Charger.vue';
+import About from '@/components/About.vue';
 
 export default {
   name: 'home',
   components: {
     Map,
     Charger,
+    About,
   },
   computed: mapState({
     chargers: state => state.chargers.all,
