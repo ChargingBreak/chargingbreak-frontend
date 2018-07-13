@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <h3 class="display-3 mt-2 mb-4">{{ details.charger.name }}</h3>
+  <div class="wrapper" v-if="details">
+    <h3 class="display-3 mt-2 mb-4">{{ details.name }}</h3>
 
     <nav class="navbar navbar-dark bg-primary mb-2">
       <span class="navbar-brand mb-0 h1">Details</span>
@@ -9,15 +9,15 @@
     <div class="card-deck details text-center">
       <div class="card bg-light stalls">
         <div class="card-body">
-          <simple-svg v-for="n in details.charger.stallCount" filepath="/img/symbols/supercharger.svg" />
-          <h2><span class="badge">{{ details.charger.stallCount }} stalls</span></h2>
+          <simple-svg v-for="n in details.stallCount" filepath="/img/symbols/supercharger.svg" />
+          <h2><span class="badge">{{ details.stallCount }} stalls</span></h2>
         </div>
       </div>
 
       <div class="card bg-light">
         <div class="card-body text-center">
           <simple-svg filepath="/img/symbols/calendar.svg" />
-          <p class="mt-2">Opened {{ formatDuration(details.charger.dateOpened) }}</p>
+          <p class="mt-2">Opened {{ formatDuration(details.dateOpened) }}</p>
         </div>
       </div>
 
@@ -138,10 +138,6 @@
   height: 32px;
 }
 
-.tips .card-img-top {
-  /*height: 320px;*/
-}
-
 .tips .card-title {
   text-transform: capitalize;
   line-height: 62px;
@@ -158,20 +154,24 @@ import moment from 'moment';
 
 export default {
   props: {
-    details: Object,
     users: Array,
+    chargers: Array,
+    reviews: Array,
+    chargerId: Number,
   },
   data() {
     return {
-
     };
   },
   computed: {
+    details() {
+      return _.find(this.chargers, item => item.id === this.chargerId);
+    },
     ratings() {
-      return this.details.reviews.filter(review => review.type === 'RATING');
+      return this.reviews.filter(review => review.chargerId === this.chargerId && review.type === 'RATING');
     },
     tips() {
-      return this.details.reviews.filter(review => review.type === 'TIP');
+      return this.reviews.filter(review => review.type === 'TIP');
     }
   },
   methods: {

@@ -1,21 +1,17 @@
 <template>
   <div>
     <div class="row">
-      <div :class="'col-md-' + (selectedCharger ? 6 : 12)">
-        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" :class="{ minimized: typeof selectedCharger === 'object' }" />
+      <div :class="'col-md-' + (hasSelectedCharger() ? 6 : 12)">
+        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" :class="{ minimized: typeof hasSelectedCharger() === 'object' }" />
       </div>
-      <div class="col-md-6" v-if="selectedCharger">
-        <Charger :details="selectedCharger" :users="users" class="charger" />
+      <div class="col-md-6 bg-white" v-if="hasSelectedCharger()">
+        <Charger :chargerId="parseInt($route.params.chargerId)" :users="users" :chargers="chargers" :reviews="reviews" class="charger" />
       </div>
     </div>
   </div>
 </template>
 
 <style>
-.charger {
-  background: white;
-}
-
 .map {
   position: fixed;
   width: 100vw !important;
@@ -41,31 +37,22 @@ export default {
     Map,
     Charger,
   },
-  computed: {
-    ...mapState({
-      chargers: state => state.chargers.all,
-      users: state => state.users.all,
-      selectedCharger: (state) => {
-        if (state.chargers.selectedChargerId) {
-          const charger = _.find(state.chargers.all, item => item.id === state.chargers.selectedChargerId);
-          const reviews = state.reviews.all.filter(item => item.chargerId === state.chargers.selectedChargerId);
-
-          return {
-            charger,
-            reviews,
-          };
-        }
-      },
-    }),
-  },
+  computed: mapState({
+    chargers: state => state.chargers.all,
+    users: state => state.users.all,
+    reviews: state => state.reviews.all
+  }),
   created() {
     this.$store.dispatch('chargers/getAllChargers');
     this.$store.dispatch('users/getAllUsers');
   },
   methods: {
     onChargerClicked(chargerId) {
-      this.$store.dispatch('chargers/setSelectedCharger', { id: chargerId });
+      this.$router.push({ path: '/charger/' + chargerId })
       this.$store.dispatch('reviews/getReviewsForCharger', { id: chargerId });
+    },
+    hasSelectedCharger() {
+      return typeof this.$route.params.chargerId !== 'undefined';
     },
   },
 };
