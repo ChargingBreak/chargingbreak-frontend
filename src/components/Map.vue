@@ -5,7 +5,7 @@
 
       <div v-for="charger in chargers" :key="charger.id">
         <l-marker
-          :lat-lng="[charger.gps.latitude, charger.gps.longitude]"
+          :lat-lng="[charger.latitude, charger.longitude]"
           :icon="chargerIcon" v-on:click="handleChargerClicked(charger.id)"
         ></l-marker>
       </div>
