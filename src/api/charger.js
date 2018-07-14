@@ -5,7 +5,7 @@ export default {
     // TODO: Error handling
     axios.get('https://api.chargingbreak.com/charger')
       .then((chargers) => {
-        callback(chargers.data.filter(charger => charger.status === 'OPEN'));
+        callback(chargers.data);
       });
   },
 };

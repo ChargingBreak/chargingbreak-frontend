@@ -1,3 +1,5 @@
+import router from '../../router';
+
 const AmazonCognitoIdentity = require('amazon-cognito-auth-js');
 
 const awsConfig = {
@@ -9,11 +11,18 @@ const awsConfig = {
   TokenScopesArray: ['email', 'openid', 'profile'],
 };
 
-const auth = new AmazonCognitoIdentity.CognitoAuth(awsConfig);
+const state = {
+  auth: new AmazonCognitoIdentity.CognitoAuth(awsConfig),
+};
 
-auth.userhandler = {
+state.auth.userhandler = {
   onSuccess: () => {
     console.log('Sign in success');
+    /* this is already done but, make sure? */
+    state.auth.cacheTokensScopes();
+
+    /* should we push a / route? */
+    router.push({ path: '/' });
   },
   onFailure: (err) => {
     console.log(err);
@@ -22,10 +31,12 @@ auth.userhandler = {
 
 const actions = {
   tryAutoSignIn() {
-    auth.parseCognitoWebResponse(window.location.href);
+    state.auth.parseCognitoWebResponse(window.location.href);
+    console.log(`Is there a session: ${state.auth.isUserSignedIn()}`);
   },
 };
 
 export default {
+  state,
   actions,
 };
