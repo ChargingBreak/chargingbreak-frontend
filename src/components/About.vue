@@ -14,8 +14,8 @@
       Carefully curated by other EV owners like you.
     </p>
 
-    <button type="button" class="btn btn-primary btn-lg mr-3">Sign up</button>
-    <button type="button" class="btn btn-secondary btn-lg">Log in</button>
+    <button type="button" class="btn btn-primary btn-lg mr-3"
+      v-on:click="onLoginClicked">Log in</button>
   </div>
 </template>
 
@@ -45,5 +45,10 @@
 <script>
 export default {
   name: 'about',
+  methods: {
+    onLoginClicked() {
+      window.location.href = 'https://auth.chargingbreak.com/login?response_type=code&client_id=4i246thk15heml2i4o4dn7fmr0&redirect_uri=https://chargingbreak.com';
+    },
+  },
 };
 </script>

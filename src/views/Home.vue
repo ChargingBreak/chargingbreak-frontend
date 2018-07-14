@@ -48,6 +48,7 @@ export default {
     reviews: state => state.reviews.all,
   }),
   created() {
+    this.$store.dispatch('tryAutoSignIn');
     this.$store.dispatch('chargers/getAllChargers');
     this.$store.dispatch('users/getAllUsers');
 
