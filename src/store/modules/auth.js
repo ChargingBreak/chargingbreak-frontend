@@ -1,6 +1,7 @@
 import router from '../../router';
 
-const AmazonCognitoIdentity = require('amazon-cognito-auth-js');
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const AmazonCognitoAuth = require('amazon-cognito-auth-js');
 
 const awsConfig = {
   UserPoolId: 'us-east-1_Rtshp0rgF',
@@ -9,10 +10,13 @@ const awsConfig = {
   RedirectUriSignIn: 'https://chargingbreak.com',
   RedirectUriSignOut: 'https://chargingbreak.com',
   TokenScopesArray: ['email', 'openid', 'profile'],
+  Storage: new AmazonCognitoIdentity.CookieStorage({
+    domain: '.chargingbreak.com',
+  }),
 };
 
 const state = {
-  auth: new AmazonCognitoIdentity.CognitoAuth(awsConfig),
+  auth: new AmazonCognitoAuth.CognitoAuth(awsConfig),
 };
 
 state.auth.userhandler = {
@@ -23,6 +27,7 @@ state.auth.userhandler = {
 
     /* should we push a / route? */
     router.push({ path: '/' });
+    console.log(`Is there a session: ${state.auth.isUserSignedIn()}`);
   },
   onFailure: (err) => {
     console.log(err);
@@ -31,8 +36,13 @@ state.auth.userhandler = {
 
 const actions = {
   tryAutoSignIn() {
+    /* do we need to hand sso? */
     state.auth.parseCognitoWebResponse(window.location.href);
-    console.log(`Is there a session: ${state.auth.isUserSignedIn()}`);
+
+    /* do we have a username? if so try to refresh the session */
+    if (state.auth.getUsername()) {
+      state.auth.refreshSession(state.auth.signInUserSession.getRefreshToken().getToken());
+    }
   },
 };
 

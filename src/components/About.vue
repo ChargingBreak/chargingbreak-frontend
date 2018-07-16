@@ -47,7 +47,9 @@ export default {
   name: 'about',
   methods: {
     onLoginClicked() {
-      window.location.href = 'https://auth.chargingbreak.com/login?response_type=code&client_id=4i246thk15heml2i4o4dn7fmr0&redirect_uri=https://chargingbreak.com';
+      const domain = 'https://chargingbreak.com';
+      const clientid = '4i246thk15heml2i4o4dn7fmr0';
+      window.location.href = `https://auth.chargingbreak.com/login?response_type=code&client_id=${clientid}&redirect_uri=${domain}`;
     },
   },
 };
