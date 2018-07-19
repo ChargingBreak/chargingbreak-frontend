@@ -31,12 +31,7 @@ const actions = {
 
       const user = state.auth.getCurrentUser();
 
-      if (user) {
-        commit('isAuthenticating');
-        user.getSession((error, session) => {
-          commit('setUser', session);
-        });
-      }
+      commit('setUser', user);
     }
   },
 };

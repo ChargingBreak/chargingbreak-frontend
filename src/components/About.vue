@@ -18,7 +18,11 @@
       <i class="fa fa-refresh fa-spin"></i>
     </div>
 
-    <a v-if="!isAuthenticating && !isAuthenticated" :href="loginUrl" class="btn btn-primary btn-lg mr-3">Log in</a>
+    <a
+      v-if="!isAuthenticating && !isAuthenticated"
+      :href="loginUrl"
+      class="btn btn-primary btn-lg mr-3"
+    >Log in</a>
   </div>
 </template>
 
