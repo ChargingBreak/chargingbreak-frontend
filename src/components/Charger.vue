@@ -40,7 +40,11 @@
     </nav>
 
     <div class="card-deck ratings">
-      <div v-for="rating in chargerDetails.ratings" :key="rating.id" class="card border-light text-center">
+      <div
+        v-for="rating in chargerDetails.ratings"
+        :key="rating.id"
+        class="card border-light text-center"
+      >
         <div class="card-body px-0 py-2">
           <simple-svg
             filepath="/img/symbols/rating.svg"
@@ -195,11 +199,8 @@ export default {
     chargerDetails: Object,
   },
   created() {
-    const userIds = _.union(this.chargerDetails.tips.map(tip => tip.user_id));
-
-    for (const userId in userIds) {
-      this.$store.dispatch('users/getUser', userId);
-    }
+    _.union(this.chargerDetails.tips.map(tip => tip.user_id))
+      .forEach(userId => this.$store.dispatch('users/getUser', userId));
   },
   methods: {
     formatDuration(date) {

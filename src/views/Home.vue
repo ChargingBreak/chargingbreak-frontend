@@ -44,7 +44,7 @@ export default {
   computed: mapState({
     chargers: state => state.chargers.all,
     chargerDetails: state => state.chargers.details,
-    users: state => state.users.all
+    users: state => state.users.all,
   }),
   created() {
     this.$store.dispatch('tryAutoSignIn');

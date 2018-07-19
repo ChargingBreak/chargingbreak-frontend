@@ -3,6 +3,8 @@ import search from '../../api/search';
 // initial state
 const state = {
   results: [],
+  error: null,
+  isLoading: false,
 };
 
 // getters
@@ -11,8 +13,14 @@ const getters = {};
 // actions
 const actions = {
   search({ commit }, query) {
-    search.search(query, (setSearchResults) => {
-      commit('setSearchResults', setSearchResults);
+    commit('setLoading');
+
+    search.search(query, (response, error) => {
+      if (error) {
+        commit('setError', error);
+      } else {
+        commit('setSearchResults', response);
+      }
     });
   },
 };
@@ -22,6 +30,14 @@ const actions = {
 const mutations = {
   setSearchResults(state, searchResults) {
     state.results = searchResults;
+    state.isLoading = false;
+  },
+  setError(state, error) {
+    state.error = error;
+    state.isLoading = false;
+  },
+  setLoading(state) {
+    state.isLoading = true;
   },
 };
 /* eslint-enable no-param-reassign, no-shadow */

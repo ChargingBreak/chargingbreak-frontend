@@ -1,18 +1,23 @@
 import axios from 'axios';
+import { API_BASE_URL } from '../constants';
 
 export default {
   getChargers(callback) {
-    // TODO: Error handling
-    axios.get('https://api.chargingbreak.com/charger')
+    axios.get(`${API_BASE_URL}/charger`)
       .then((chargers) => {
         callback(chargers.data);
+      })
+      .catch((error) => {
+        callback(null, error);
       });
   },
   getChargerDetails(chargerId, callback) {
-    // TODO: Error handling
-    axios.get('/data/charger.json')
+    axios.get(`${API_BASE_URL}/charger/${chargerId}`)
       .then((charger) => {
         callback(charger.data);
+      })
+      .catch((error) => {
+        callback(null, error);
       });
   },
 };

@@ -1,11 +1,14 @@
 import axios from 'axios';
+import { API_BASE_URL } from '../constants';
 
 export default {
   search(query, callback) {
-    // TODO: Error handling
-    axios.get('/data/search.json')
-      .then((search) => {
-        callback(search);
+    axios.get(`${API_BASE_URL}/search`)
+      .then((searchResults) => {
+        callback(searchResults.data);
+      })
+      .catch((error) => {
+        callback(null, error);
       });
   },
 };
