@@ -43,7 +43,7 @@
       <div v-for="rating in chargerDetails.ratings" :key="rating.id" class="card border-light text-center">
         <div class="card-body px-0 py-2">
           <simple-svg
-            filepath="/img/symbols/ratings.svg"
+            filepath="/img/symbols/rating.svg"
             :class="'rating-' + rating.rating + ' mx-4'"
           />
 
