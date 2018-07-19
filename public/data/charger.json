@@ -13,10 +13,8 @@
     "regionId": 100,
     "region": "North America"
   },
-  "gps": {
-    "latitude": 39.00496,
-    "longitude": -78.337836
-  },
+  "latitude": 39.00496,
+  "longitude": -78.337836
   "dateOpened": "2015-09-02",
   "stallCount": 6,
   "counted": true,
