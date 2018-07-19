@@ -8,4 +8,11 @@ export default {
         callback(chargers.data);
       });
   },
+  getChargerDetails(chargerId, callback) {
+    // TODO: Error handling
+    axios.get('/data/charger.json')
+      .then((charger) => {
+        callback(charger.data);
+      });
+  },
 };

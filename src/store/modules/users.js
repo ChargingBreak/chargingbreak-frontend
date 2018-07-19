@@ -1,16 +1,8 @@
-// import user from '../../api/user';
-
-const stubUsers = [
-  {
-    id: 1,
-    name: 'Mathias Hansen',
-    photoUrl: 'https://i0.wp.com/wp.laravel-news.com/wp-content/uploads/2014/12/mathias.jpg',
-  },
-];
+import user from '../../api/user';
 
 // initial state
 const state = {
-  all: [],
+  all: {},
 };
 
 // getters
@@ -18,18 +10,18 @@ const getters = {};
 
 // actions
 const actions = {
-  getAllUsers({ commit }) {
-    // user.getUsers((users) => {
-    commit('setUsers', stubUsers);
-    // });
+  getUser({ commit }, userId) {
+    user.getUser(userId, (user) => {
+      commit('addUser', user);
+    });
   },
 };
 
 // mutations
 /* eslint-disable no-param-reassign, no-shadow */
 const mutations = {
-  setUsers(state, users) {
-    state.all = users;
+  addUser(state, user) {
+    state.all[user.id] = user;
   },
 };
 /* eslint-enable no-param-reassign, no-shadow */

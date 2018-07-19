@@ -6,11 +6,10 @@
       </div>
       <div class="col-md-6 bg-white">
         <Charger
-          v-if="hasSelectedCharger()"
+          v-if="hasSelectedCharger() && chargerDetails"
           :chargerId="parseInt($route.params.chargerId)"
           :users="users"
-          :chargers="chargers"
-          :reviews="reviews"
+          :chargerDetails="chargerDetails"
           class="charger"
         />
         <About v-else />
@@ -44,22 +43,21 @@ export default {
   },
   computed: mapState({
     chargers: state => state.chargers.all,
-    users: state => state.users.all,
-    reviews: state => state.reviews.all,
+    chargerDetails: state => state.chargers.details,
+    users: state => state.users.all
   }),
   created() {
     this.$store.dispatch('tryAutoSignIn');
     this.$store.dispatch('chargers/getAllChargers');
-    this.$store.dispatch('users/getAllUsers');
 
     if (this.hasSelectedCharger()) {
-      this.$store.dispatch('reviews/getReviewsForCharger', { id: this.$route.params.chargerId });
+      this.$store.dispatch('chargers/getChargerDetails', { id: this.$route.params.chargerId });
     }
   },
   methods: {
     onChargerClicked(chargerId) {
       this.$router.push({ path: `/charger/${chargerId}` });
-      this.$store.dispatch('reviews/getReviewsForCharger', { id: chargerId });
+      this.$store.dispatch('chargers/getChargerDetails', { id: chargerId });
     },
     hasSelectedCharger() {
       return typeof this.$route.params.chargerId !== 'undefined';

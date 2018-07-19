@@ -3,6 +3,7 @@ import charger from '../../api/charger';
 // initial state
 const state = {
   all: [],
+  details: null
 };
 
 // getters
@@ -15,6 +16,11 @@ const actions = {
       commit('setChargers', chargers);
     });
   },
+  getChargerDetails({ commit }, chargerId) {
+    charger.getChargerDetails(chargerId, charger => {
+      commit('setChargerDetails', charger);
+    })
+  }
 };
 
 // mutations
@@ -22,6 +28,9 @@ const actions = {
 const mutations = {
   setChargers(state, chargers) {
     state.all = chargers;
+  },
+  setChargerDetails(state, charger) {
+    state.details = charger;
   },
 };
 /* eslint-enable no-param-reassign, no-shadow */

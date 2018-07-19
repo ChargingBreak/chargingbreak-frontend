@@ -1,0 +1,74 @@
+{
+  "id": 632,
+  "locationId": "strasburgsupercharger",
+  "name": "Strasburg, VA",
+  "status": "OPEN",
+  "address": {
+    "street": "119 Hite Ln",
+    "city": "Strasburg",
+    "state": "VA",
+    "zip": "22657",
+    "countryId": 100,
+    "country": "USA",
+    "regionId": 100,
+    "region": "North America"
+  },
+  "gps": {
+    "latitude": 39.00496,
+    "longitude": -78.337836
+  },
+  "dateOpened": "2015-09-02",
+  "stallCount": 6,
+  "counted": true,
+  "elevationMeters": 204,
+  "powerKilowatt": 0,
+  "solarCanopy": false,
+  "battery": false,
+  "statusDays": 0,
+  "urlDiscuss": true,
+  "tips": [
+    {
+      "chargerId": 632,
+      "userId": 1,
+      "theme": "ATMOSPHERE",
+      "description": "The views here are amazing",
+      "photoUrl": "/img/uploads/IMG_1507.JPG"
+    },
+    {
+      "chargerId": 632,
+      "userId": 1,
+      "theme": "ATMOSPHERE",
+      "description": "Up for a little detour? Take a drive through scenic Skyline Drive, using the Front Royal entrance, about 6 miles from the Supercharger",
+      "photoUrl": "/img/uploads/IMG_7666.JPG"
+    },
+    {
+      "chargerId": 632,
+      "userId": 1,
+      "theme": "FOOD",
+      "description": "If Burger King isn't your thing, call Little Anthony's Pizza, and pick up your order on the way to the Supercharger (it's right around the corner)",
+      "photoUrl": "https://lh3.ggpht.com/p/AF1QipPUpgIgqbOXSziYf_D_iMZhWOwsYarml0TShqKM=s512"
+    }
+  ],
+  "ratings": [
+    {
+      "theme": "FOOD",
+      "rating": 3
+    },
+    {
+      "theme": "KIDS",
+      "rating": 3
+    },
+    {
+      "theme": "RESTROOMS",
+      "rating": 3
+    },
+    {
+      "theme": "SHOPPING",
+      "rating": 1
+    },
+    {
+      "theme": "ATMOSPHERE",
+      "rating": 5
+    }
+  ]
+}
