@@ -12,7 +12,11 @@
           :chargerDetails="chargerDetails"
           class="charger"
         />
-        <About v-else />
+        <About
+          v-else
+          :isAuthenticating="isAuthenticating"
+          :isAuthenticated="user !== null"
+        />
       </div>
     </div>
   </div>
@@ -45,9 +49,11 @@ export default {
     chargers: state => state.chargers.all,
     chargerDetails: state => state.chargers.details,
     users: state => state.users.all,
+    isAuthenticating: state => state.auth.isAuthenticating,
+    user: state => state.auth.user,
   }),
   created() {
-    this.$store.dispatch('tryAutoSignIn');
+    this.$store.dispatch('auth/tryAutoSignIn');
     this.$store.dispatch('chargers/getAllChargers');
 
     if (this.hasSelectedCharger()) {

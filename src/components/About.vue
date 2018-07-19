@@ -14,8 +14,11 @@
       Carefully curated by other EV owners like you.
     </p>
 
-    <button type="button" class="btn btn-primary btn-lg mr-3"
-      v-on:click="onLoginClicked">Log in</button>
+    <div v-if="isAuthenticating" class="btn btn-primary btn-lg mr-3">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+
+    <a v-if="!isAuthenticating && !isAuthenticated" :href="loginUrl" class="btn btn-primary btn-lg mr-3">Log in</a>
   </div>
 </template>
 
@@ -43,14 +46,18 @@
 </style>
 
 <script>
+import { LOGIN_URL } from '../constants';
+
 export default {
   name: 'about',
-  methods: {
-    onLoginClicked() {
-      const domain = 'https://chargingbreak.com';
-      const clientid = '4i246thk15heml2i4o4dn7fmr0';
-      window.location.href = `https://auth.chargingbreak.com/login?response_type=code&client_id=${clientid}&redirect_uri=${domain}`;
-    },
+  props: {
+    isAuthenticating: Boolean,
+    isAuthenticated: Boolean,
+  },
+  data() {
+    return {
+      loginUrl: LOGIN_URL,
+    };
   },
 };
 </script>

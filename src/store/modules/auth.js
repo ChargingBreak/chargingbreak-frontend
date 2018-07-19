@@ -1,22 +1,10 @@
-import router from '../../router';
-
-const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-const AmazonCognitoAuth = require('amazon-cognito-auth-js');
-
-const awsConfig = {
-  UserPoolId: 'us-east-1_Rtshp0rgF',
-  ClientId: '4i246thk15heml2i4o4dn7fmr0',
-  AppWebDomain: 'auth.chargingbreak.com',
-  RedirectUriSignIn: 'https://chargingbreak.com',
-  RedirectUriSignOut: 'https://chargingbreak.com',
-  TokenScopesArray: ['email', 'openid', 'profile'],
-  Storage: new AmazonCognitoIdentity.CookieStorage({
-    domain: '.chargingbreak.com',
-  }),
-};
+import { CognitoAuth } from 'amazon-cognito-auth-js';
+import { AWS_COGNITO_CONFIG } from '../../constants';
 
 const state = {
-  auth: new AmazonCognitoAuth.CognitoAuth(awsConfig),
+  auth: new CognitoAuth(AWS_COGNITO_CONFIG),
+  user: null,
+  isAuthenticating: false,
 };
 
 state.auth.userhandler = {
@@ -25,28 +13,50 @@ state.auth.userhandler = {
     /* this is already done but, make sure? */
     state.auth.cacheTokensScopes();
 
-    /* should we push a / route? */
-    router.push({ path: '/' });
     console.log(`Is there a session: ${state.auth.isUserSignedIn()}`);
   },
   onFailure: (err) => {
-    console.log(err);
+    console.log('Authentication failure', err);
   },
 };
 
 const actions = {
-  tryAutoSignIn() {
+  tryAutoSignIn({ commit }) {
     /* do we need to hand sso? */
     state.auth.parseCognitoWebResponse(window.location.href);
 
     /* do we have a username? if so try to refresh the session */
     if (state.auth.getUsername()) {
       state.auth.refreshSession(state.auth.signInUserSession.getRefreshToken().getToken());
+
+      const user = state.auth.getCurrentUser();
+
+      if (user) {
+        commit('isAuthenticating');
+        user.getSession((error, session) => {
+          commit('setUser', session);
+        });
+      }
     }
   },
 };
 
+// mutations
+/* eslint-disable no-param-reassign, no-shadow */
+const mutations = {
+  isAuthenticating(state) {
+    state.isAuthenticating = true;
+  },
+  setUser(state, user) {
+    state.user = user;
+    state.isAuthenticating = false;
+  },
+};
+/* eslint-enable no-param-reassign, no-shadow */
+
 export default {
+  namespaced: true,
   state,
   actions,
+  mutations,
 };
