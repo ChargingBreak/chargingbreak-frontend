@@ -13,10 +13,10 @@ const getters = {};
 
 // actions
 const actions = {
-  getAllChargers({ commit }) {
+  getAllChargers({ commit, rootState }) {
     commit('setLoading');
 
-    charger.getChargers((response, error) => {
+    charger.getChargers(null, (response, error) => {
       if (error) {
         commit('setError', error);
       } else {
@@ -24,14 +24,25 @@ const actions = {
       }
     });
   },
-  getChargerDetails({ commit }, chargerId) {
+  getChargerDetails({ commit, rootState }, parameters) {
     commit('setLoading');
 
-    charger.getChargerDetails(chargerId, (response, error) => {
+    charger.getChargerDetails(rootState.auth.jwt, parameters.id, (response, error) => {
       if (error) {
         commit('setError', error);
       } else {
         commit('setChargerDetails', response);
+      }
+    });
+  },
+  submitTip({ commit, rootState }, parameters) {
+    commit('setLoading');
+
+    charger.submitTip(rootState.auth.jwt, parameters.id, parameters.text, parameters.category, (response, error) => {
+      if (error) {
+        commit('setError', error);
+      } else {
+        console.log(response); // TODO
       }
     });
   },

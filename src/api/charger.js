@@ -2,19 +2,35 @@ import axios from 'axios';
 import { API_BASE_URL } from '../constants';
 
 export default {
-  getChargers(callback) {
-    axios.get(`${API_BASE_URL}/charger`)
-      .then((chargers) => {
-        callback(chargers.data);
+  getChargers(jwt, callback) {
+    axios.get(`${API_BASE_URL}/charger`, { headers: { Authorization: jwt }})
+      .then((response) => {
+        callback(response.data);
       })
       .catch((error) => {
         callback(null, error);
       });
   },
-  getChargerDetails(chargerId, callback) {
-    axios.get(`${API_BASE_URL}/charger/${chargerId}`)
-      .then((charger) => {
-        callback(charger.data);
+  getChargerDetails(jwt, chargerId, callback) {
+    console.log(`${API_BASE_URL}/charger/${chargerId}`, { headers: { Authorization: jwt }});
+    
+    axios.get(`${API_BASE_URL}/charger/${chargerId}`, { headers: { Authorization: jwt }})
+      .then((response) => {
+        callback(response.data);
+      })
+      .catch((error) => {
+        callback(null, error);
+      });
+  },
+  submitTip(jwt, chargerId, text, category, callback) {
+    const data = {
+      text,
+      category
+    };
+
+    axios.post(`${API_BASE_URL}/tip/${chargerId}`, data, { headers: { Authorization: jwt }})
+      .then((response) => {
+        callback(response.data);
       })
       .catch((error) => {
         callback(null, error);

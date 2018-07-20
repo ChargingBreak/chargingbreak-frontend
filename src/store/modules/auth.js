@@ -2,23 +2,30 @@ import { CognitoAuth } from 'amazon-cognito-auth-js';
 import { AWS_COGNITO_CONFIG } from '../../constants';
 
 const state = {
-  auth: new CognitoAuth(AWS_COGNITO_CONFIG),
+  auth: createCognitoAuth(),
   user: null,
+  jwt: null,
   isAuthenticating: false,
 };
 
-state.auth.userhandler = {
-  onSuccess: () => {
-    console.log('Sign in success');
-    /* this is already done but, make sure? */
-    state.auth.cacheTokensScopes();
+function createCognitoAuth() {
+  const auth = new CognitoAuth(AWS_COGNITO_CONFIG);
 
-    console.log(`Is there a session: ${state.auth.isUserSignedIn()}`);
-  },
-  onFailure: (err) => {
-    console.log('Authentication failure', err);
-  },
-};
+  auth.userhandler = {
+    onSuccess: (result) => {
+      console.log('Sign in success', result);
+      /* this is already done but, make sure? */
+      state.auth.cacheTokensScopes();
+
+      console.log(`Is there a session: ${state.auth.isUserSignedIn()}`);
+    },
+    onFailure: (err) => {
+      console.log('Authentication failure', err);
+    },
+  };
+
+  return auth;
+}
 
 const actions = {
   tryAutoSignIn({ commit }) {
@@ -32,6 +39,11 @@ const actions = {
       const user = state.auth.getCurrentUser();
 
       commit('setUser', user);
+
+      const jwt = state.auth.signInUserSession.getIdToken().getJwtToken();
+      if (jwt) {
+        commit('setJWT', jwt);
+      }
     }
   },
 };
@@ -45,6 +57,9 @@ const mutations = {
   setUser(state, user) {
     state.user = user;
     state.isAuthenticating = false;
+  },
+  setJWT(state, jwt) {
+    state.jwt = jwt;
   },
 };
 /* eslint-enable no-param-reassign, no-shadow */
