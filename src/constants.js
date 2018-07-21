@@ -7,7 +7,7 @@ export const AUTH_REDIRECT_URL = window.location.hostname.indexOf('localhost') !
 
 export const AWS_COGNITO_CONFIG = {
   UserPoolId: 'us-east-1_Rtshp0rgF',
-  ClientId: '4i246thk15heml2i4o4dn7fmr0',
+  ClientId: '3791tctvhu1p5hb9tqitstbmqi',
   AppWebDomain: 'auth.chargingbreak.com',
   RedirectUriSignIn: AUTH_REDIRECT_URL,
   RedirectUriSignOut: AUTH_REDIRECT_URL,
