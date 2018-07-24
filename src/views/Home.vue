@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-6">
+      <div :class="(shouldShowChargerDetails() ? 'd-sm-none' : '') + ' col-md-6 col-sm-12'">
         <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" />
       </div>
-      <div class="col-md-6 bg-white">
+      <div class="col-md-6 col-sm-12 bg-white">
         <Charger
-          v-if="hasSelectedCharger() && chargerDetails && !chargersAreLoading"
+          v-if="shouldShowChargerDetails()"
           :chargerId="parseInt($route.params.chargerId)"
           :users="users"
           :chargerDetails="chargerDetails"
@@ -69,6 +69,9 @@ export default {
     },
     hasSelectedCharger() {
       return typeof this.$route.params.chargerId !== 'undefined';
+    },
+    shouldShowChargerDetails() {
+      return this.hasSelectedCharger() && this.chargerDetails && !this.chargersAreLoading;
     },
   },
 };
