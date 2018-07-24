@@ -6,7 +6,7 @@ export const API_BASE_URL = 'https://api.chargingbreak.com';
 export const AUTH_REDIRECT_URL = window.location.hostname.indexOf('localhost') !== -1 ? window.location.href : 'https://chargingbreak.com';
 
 export const AWS_COGNITO_CONFIG = {
-  UserPoolId: 'us-east-1_Rtshp0rgF',
+  UserPoolId: 'us-east-1_Ki4TpCVjN',
   ClientId: '3791tctvhu1p5hb9tqitstbmqi',
   AppWebDomain: 'auth.chargingbreak.com',
   RedirectUriSignIn: AUTH_REDIRECT_URL,
