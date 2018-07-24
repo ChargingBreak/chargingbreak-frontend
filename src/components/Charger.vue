@@ -92,12 +92,12 @@
             <div class="col-md-4">
               <div class="float-right text-center">
                 <simple-svg filepath="/img/symbols/upvote.svg" class="upvote" />
-                <h4>2</h4>
+                <h4>1</h4>
               </div>
             </div>
           </div>
 
-          <p class="card-text">{{ tip.description }}</p>
+          <p class="card-text">{{ tip.text }}</p>
           <p class="card-text" v-if="users[tip.userId]">
             <small class="text-muted">
               <b-img
