@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div :class="(shouldShowChargerDetails() ? 'd-sm-none' : '') + ' col-md-6 col-sm-12'">
-        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map" />
+        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map d-sm-block" />
       </div>
       <div class="col-md-6 col-sm-12 bg-white">
         <Charger
