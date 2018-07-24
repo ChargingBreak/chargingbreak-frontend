@@ -14,11 +14,6 @@ Vue.component('simple-svg', SimpleSVG);
 
 Vue.config.productionTip = false;
 
-// Handle post-SSO authentication
-if (window.location.search.indexOf('code=') !== -1) {
-	window.location.href = '/';
-}
-
 new Vue({
   router,
   store,
