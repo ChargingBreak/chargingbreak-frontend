@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="row">
-      <div :class="(shouldShowChargerDetails() ? 'd-sm-none' : '') + ' col-md-6 col-sm-12'">
-        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map d-sm-block" />
+      <div :class="(shouldShowChargerDetails() ? 'd-sm-none d-md-block' : '') + ' col-md-6 col-sm-12'">
+        <Map :chargers="chargers" :handleChargerClicked="onChargerClicked" class="map d-sm-block d-md-fixed" />
       </div>
       <div class="col-md-6 col-sm-12 bg-white">
         <Charger
@@ -24,11 +24,14 @@
 </template>
 
 <style>
-.map {
-  position: fixed;
-  width: 50vw !important;
-  height: 100vh !important;
+@media (min-width: 544px) {
+  .map {
+    width: 50vw !important;
+    height: 100vh !important;
+  }
+}
 
+.map {
   transition: width 1s, height 1s;
 }
 </style>
