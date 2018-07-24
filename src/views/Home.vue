@@ -6,12 +6,13 @@
       </div>
       <div class="col-md-6 bg-white">
         <Charger
-          v-if="hasSelectedCharger() && chargerDetails"
+          v-if="hasSelectedCharger() && chargerDetails && !chargersAreLoading"
           :chargerId="parseInt($route.params.chargerId)"
           :users="users"
           :chargerDetails="chargerDetails"
           class="charger"
         />
+        <div v-else-if="chargersAreLoading">Loading...</div>
         <About
           v-else
           :isAuthenticating="isAuthenticating"
@@ -48,6 +49,7 @@ export default {
   computed: mapState({
     chargers: state => state.chargers.all,
     chargerDetails: state => state.chargers.details,
+    chargersAreLoading: state => state.chargers.isLoading,
     users: state => state.users.all,
     isAuthenticating: state => state.auth.isAuthenticating,
     user: state => state.auth.user,
