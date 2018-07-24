@@ -37,6 +37,7 @@
 
     <nav class="navbar navbar-dark bg-primary mt-4 mb-2">
       <span class="navbar-brand mb-0 h1">Ratings</span>
+      <router-link :to="'/charger/' + chargerDetails.id + '/rate'" class="btn btn-light">Submit rating</router-link>
     </nav>
 
     <div class="card-deck ratings">
@@ -47,9 +48,11 @@
       >
         <div class="card-body px-0 py-2">
           <simple-svg
+            v-if="rating.rating > 0"
             filepath="/img/symbols/rating.svg"
             :class="'rating-' + rating.rating + ' mx-4'"
           />
+          <span v-else>Rate me!</span>
 
           <simple-svg
             :filepath="'/img/symbols/' + rating.theme.toLowerCase() + '.svg'"
@@ -64,7 +67,12 @@
 
     <nav class="navbar navbar-dark bg-primary mt-4 mb-2">
       <span class="navbar-brand mb-0 h1">Tips</span>
+      <router-link :to="'/charger/' + chargerDetails.id + '/tip'" class="btn btn-light">Submit tip</router-link>
     </nav>
+
+    <div v-if="chargerDetails.tips.length <= 0">
+      No tips submitted yet for this charger. <router-link :to="'/charger/' + chargerDetails.id + '/tip'">Why don't you be the first?</router-link>
+    </div>
 
     <div class="card-columns tips">
       <div class="card" v-for="tip in chargerDetails.tips" :key="tip.id">

@@ -35,13 +35,26 @@ const actions = {
       }
     });
   },
-  submitTip({ commit, rootState }, parameters) {
+  submitTip({ commit, rootState, dispatch }, parameters) {
     commit('setLoading');
 
-    charger.submitTip(rootState.auth.jwt, parameters.id, parameters.text, parameters.category, (response, error) => {
+    charger.submitTip(rootState.auth.jwt, parameters.id, parameters.text, parameters.theme, (response, error) => {
       if (error) {
         commit('setError', error);
       } else {
+        dispatch('getChargerDetails', { id: parameters.id });
+        console.log(response); // TODO
+      }
+    });
+  },
+  submitRating({ commit, rootState, dispatch }, parameters) {
+    commit('setLoading');
+
+    charger.submitRating(rootState.auth.jwt, parameters.id, parameters.rating, parameters.theme, (response, error) => {
+      if (error) {
+        commit('setError', error);
+      } else {
+        dispatch('getChargerDetails', { id: parameters.id });
         console.log(response); // TODO
       }
     });

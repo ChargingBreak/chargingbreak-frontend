@@ -22,13 +22,27 @@ export default {
         callback(null, error);
       });
   },
-  submitTip(jwt, chargerId, text, category, callback) {
+  submitTip(jwt, chargerId, text, theme, callback) {
     const data = {
       text,
-      category
+      theme
     };
 
     axios.post(`${API_BASE_URL}/tip/${chargerId}`, data, { headers: { Authorization: jwt }})
+      .then((response) => {
+        callback(response.data);
+      })
+      .catch((error) => {
+        callback(null, error);
+      });
+  },
+  submitRating(jwt, chargerId, rating, theme, callback) {
+    const data = {
+      rating,
+      theme
+    };
+
+    axios.post(`${API_BASE_URL}/rating/${chargerId}`, data, { headers: { Authorization: jwt }})
       .then((response) => {
         callback(response.data);
       })
