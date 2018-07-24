@@ -24,15 +24,18 @@
 </template>
 
 <style>
+.map {
+  transition: width 1s, height 1s;
+
+  width: 100vw !important;
+  height: 50vh !important;
+}
+
 @media (min-width: 544px) {
   .map {
     width: 50vw !important;
     height: 100vh !important;
   }
-}
-
-.map {
-  transition: width 1s, height 1s;
 }
 </style>
 
