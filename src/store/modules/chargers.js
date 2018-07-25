@@ -43,7 +43,6 @@ const actions = {
         commit('setError', error);
       } else {
         dispatch('getChargerDetails', { id: parameters.id });
-        console.log(response); // TODO
       }
     });
   },
@@ -55,7 +54,6 @@ const actions = {
         commit('setError', error);
       } else {
         dispatch('getChargerDetails', { id: parameters.id });
-        console.log(response); // TODO
       }
     });
   },

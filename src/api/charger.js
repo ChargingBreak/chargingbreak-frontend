@@ -11,9 +11,7 @@ export default {
         callback(null, error);
       });
   },
-  getChargerDetails(jwt, chargerId, callback) {
-    console.log(`${API_BASE_URL}/charger/${chargerId}`, { headers: { Authorization: jwt }});
-    
+  getChargerDetails(jwt, chargerId, callback) {    
     axios.get(`${API_BASE_URL}/charger/${chargerId}`, { headers: { Authorization: jwt }})
       .then((response) => {
         callback(response.data);

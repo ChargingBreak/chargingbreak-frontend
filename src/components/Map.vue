@@ -1,6 +1,6 @@
 <template>
   <div>
-    <l-map :zoom="zoom" :center="center">
+    <l-map :zoom="zoom" :center="center" ref="map">
       <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
 
       <div v-for="charger in chargers" :key="charger.id">
@@ -16,6 +16,7 @@
 <script>
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import L from 'leaflet';
+import 'leaflet.locatecontrol';
 
 export default {
   name: 'charger-map',
@@ -27,6 +28,10 @@ export default {
   props: {
     chargers: Array,
     handleChargerClicked: Function,
+  },
+  mounted() {
+    const map = this.$refs.map.mapObject;
+    L.control.locate().addTo(map);
   },
   data() {
     return {
