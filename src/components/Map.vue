@@ -31,7 +31,11 @@ export default {
   },
   mounted() {
     const map = this.$refs.map.mapObject;
-    L.control.locate().addTo(map);
+    L.control.locate({
+      locateOptions: {
+          maxZoom: 10
+      }
+    }).addTo(map);
   },
   data() {
     return {
