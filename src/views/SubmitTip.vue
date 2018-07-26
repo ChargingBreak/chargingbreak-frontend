@@ -15,6 +15,7 @@
           <option value="RESTROOMS">Restrooms</option>
           <option value="SHOPPING">Shopping</option>
           <option value="ATMOSPHERE">Atmosphere</option>
+          <option value="DIRECTIONS">Directions</option>
         </select>
       </div>
 
