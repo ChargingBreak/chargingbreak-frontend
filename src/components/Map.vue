@@ -41,7 +41,7 @@ export default {
     return {
       zoom: 8,
       center: L.latLng(38.911936, -77.016719),
-      url: 'https://map.geocod.io/osm/{z}/{x}/{y}.png',
+      url: 'https://maps.geocod.io/tiles/base/{z}/{x}/{y}.png',
       attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
             '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
             ' Supercharger data graciously provided by Blueshift @ <a href="https://supercharge.info">supercharge.info</a>',
