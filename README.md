@@ -1,6 +1,5 @@
 # Charging Break Frontend
 
-[![NPM version](https://img.shields.io/npm/v/chargingbreak-frontend.svg?style=flat-square)](https://www.npmjs.com/package/chargingbreak-frontend)
 [![Build](https://travis-ci.org/ChargingBreak/chargingbreak-frontend.svg?branch=master)](https://travis-ci.org/ChargingBreak/chargingbreak-frontend)
 
 ## Dependencies
