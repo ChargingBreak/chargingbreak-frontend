@@ -1,7 +1,16 @@
 sudo: false
 language: node_js
 node_js:
-  - node
-script: 
-  - npm install && npm run build
-  
+- node
+script:
+- npm install && npm run build
+deploy:
+  provider: s3
+  access_key_id: AKIAJCFIPLWV5HCBWQOQ
+  secret_access_key:
+    secure: LvVkFHH5JLXS5egij7BAWe8AKFavJca1rIPQ8dWSmZqyJFN+A4g3gpKhUSk9u6y4d9jvbq9xhaN+oqlWmrLCimlfhR3lazM/4nut5FNd/3JJbfJgBwp6fJYIj/au5HSi9UBUMYD2vvIEYzLVjzxJex4jQNc/XVFCuAfes3/t4fPkSxkAgbDx4m3NopCCyiRvn9HA0XyoVi5Zc8zzkjuaoMXb3m+0eCjrgQT8nakWwHLpfbwoa8xdcYsW7pt/fOuK9LIosBforg/Pe63LfxAub3HGOMmXTX5OqaH2Pd4kDOqdkkvKRskv5+yGiJKHn/mIE894la2PTXxVv/faXdaZ/5dxIUUiy/F6QDwWjLWTJXvpTl0POlL/PCYgvnNVKNMLnXnqvC4jKJ1dlI9Hnbd4twecN/cI5iNrlA3vu77xAnlZXpUYRM1oyCGBXmpPBKXAcWeAL7Ge0Wd1/aLF8flbdbaKUD1ew7gpnJQobVFWautJzJiFg/mJxEHmRVmTTEMwl5AZmiW/lyfbeFkmrxqezHpsNKW+Lxp0CoMt4ntH7gc848obIo3qYxyf/WQz8l7CQtlmxH6aiVkgyrjFRPwsCRl/StXsoyOlG7ewmAyyA8C5wO4MMv8StlBj6+KCRL/Xdez9JiCmRQv2D0sGAz+TJ4lqYuV6bOqqhFGHbrVS88U=
+  bucket: chargingbreak.com
+  local-dir: dist
+  acl: public_read
+  on:
+    repo: ChargingBreak/chargingbreak-frontend
