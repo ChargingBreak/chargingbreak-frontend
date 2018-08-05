@@ -16,7 +16,7 @@ deploy:
   on:
     repo: ChargingBreak/chargingbreak-frontend
 after_deploy:
-- npm install -g travis-ci-cloudfront-invalidation && travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY -s $AWS_SECRET_KEY -c $AWS_CLOUDFRONT_DIST_ID
+- npm install -g travis-ci-cloudfront-invalidation && /home/travis/build/ChargingBreak/chargingbreak-frontend/node_modules/node/bin/travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY -s $AWS_SECRET_KEY -c $AWS_CLOUDFRONT_DIST_ID
   -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST -o 'master,stage'
 notifications:
   slack:
