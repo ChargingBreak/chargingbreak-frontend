@@ -33,8 +33,8 @@ export default {
     const map = this.$refs.map.mapObject;
     L.control.locate({
       locateOptions: {
-          maxZoom: 10
-      }
+        maxZoom: 10,
+      },
     }).addTo(map);
   },
   data() {
