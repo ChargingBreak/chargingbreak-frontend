@@ -13,7 +13,7 @@ const getters = {};
 
 // actions
 const actions = {
-  getAllChargers({ commit, rootState }) {
+  getAllChargers({ commit }) {
     commit('setLoading');
 
     charger.getChargers(null, (response, error) => {
