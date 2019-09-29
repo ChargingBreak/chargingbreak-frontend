@@ -43,7 +43,12 @@ export default {
     return {
       themes: ['FOOD', 'KIDS', 'RESTROOMS', 'SHOPPING', 'ATMOSPHERE'],
       savedThemes: [],
+<<<<<<< HEAD
     };
+=======
+    // eslint-disable-next-line
+    }
+>>>>>>> 3d6f5fca74ca84a5abb80ca753f32b6c7e5a2b01
   },
   computed: mapState({
     user: state => state.auth.user,

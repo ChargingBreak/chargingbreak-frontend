@@ -2,6 +2,7 @@ import { CognitoAuth } from 'amazon-cognito-auth-js';
 import { AWS_COGNITO_CONFIG } from '../../constants';
 
 const state = {
+  // eslint-disable-next-line
   auth: createCognitoAuth(),
   user: null,
   jwt: null,
@@ -21,7 +22,7 @@ function createCognitoAuth() {
 
       // Handle post-SSO authentication
       if (window.location.search.indexOf('code=') !== -1) {
-      	window.location.href = '/';
+        window.location.href = '/';
       }
     },
     onFailure: (err) => {

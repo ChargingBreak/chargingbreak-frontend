@@ -1,4 +1,7 @@
-# Chargingbreak Frontend
+# Charging Break Frontend
+
+[![Build](https://travis-ci.org/ChargingBreak/chargingbreak-frontend.svg?branch=master)](https://travis-ci.org/ChargingBreak/chargingbreak-frontend)
+>>>>>>> 3d6f5fca74ca84a5abb80ca753f32b6c7e5a2b01
 
 ## Dependencies
 
