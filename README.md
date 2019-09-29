@@ -1,4 +1,4 @@
-# EV Advisor Frontend
+# Chargingbreak Frontend
 
 ## Dependencies
 
@@ -30,14 +30,4 @@ npm run build
 
 ## Deploy
 
-Deploy assets to S3 and invalidate CloudFront cache entries
-
-```
-npm run deploy && npm run deploy:invalidate
-```
-
-Full deployment:
-
-```
-npm run build && npm run deploy && npm run deploy:invalidate
-```
+Commits to `master` are automatically deployed via [Netlify](https://netlify.com).

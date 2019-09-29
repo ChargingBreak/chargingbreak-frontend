@@ -42,8 +42,8 @@ export default {
   data() {
     return {
       themes: ['FOOD', 'KIDS', 'RESTROOMS', 'SHOPPING', 'ATMOSPHERE'],
-      savedThemes: []
-    }
+      savedThemes: [],
+    };
   },
   computed: mapState({
     user: state => state.auth.user,
@@ -59,7 +59,7 @@ export default {
       if (this.themes.length === this.savedThemes.length) {
         this.$router.push({ path: `/charger/${this.$route.params.chargerId}` });
       }
-    }
-  }
+    },
+  },
 };
 </script>

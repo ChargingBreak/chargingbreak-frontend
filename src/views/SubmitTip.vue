@@ -39,7 +39,7 @@ export default {
     };
   },
   computed: mapState({
-    user: state => state.auth.user
+    user: state => state.auth.user,
   }),
   created() {
     this.$store.dispatch('auth/tryAutoSignIn');
@@ -53,7 +53,7 @@ export default {
         this.$store.dispatch('chargers/submitTip', { id: this.$route.params.chargerId, text: this.formText, theme: this.formTheme });
         this.$router.push({ path: `/charger/${this.$route.params.chargerId}` });
       }
-    }
-  }
+    },
+  },
 };
 </script>

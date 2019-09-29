@@ -6,8 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "aws s3 sync dist/ s3://chargingbreak.com",
-    "deploy:invalidate": "aws cloudfront create-invalidation --distribution-id E1ZL0WAE6S9K47 --paths /index.html /chargers/*"
+    "lint:fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
     "amazon-cognito-auth-js": "^1.2.4",

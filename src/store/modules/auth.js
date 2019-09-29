@@ -18,7 +18,7 @@ function createCognitoAuth() {
       state.auth.cacheTokensScopes();
 
       console.log(`Is there a session: ${state.auth.isUserSignedIn()}`);
-      
+
       // Handle post-SSO authentication
       if (window.location.search.indexOf('code=') !== -1) {
       	window.location.href = '/';
