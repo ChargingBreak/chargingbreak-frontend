@@ -3,7 +3,7 @@ import { API_BASE_URL } from '../constants';
 
 export default {
   getChargers(jwt, callback) {
-    axios.get(`${API_BASE_URL}/charger`, { headers: { Authorization: jwt } })
+    axios.get(`${API_BASE_URL}/chargers`, { headers: { Authorization: jwt } })
       .then((response) => {
         callback(response.data);
       })
@@ -12,7 +12,7 @@ export default {
       });
   },
   getChargerDetails(jwt, chargerId, callback) {
-    axios.get(`${API_BASE_URL}/charger/${chargerId}`, { headers: { Authorization: jwt } })
+    axios.get(`${API_BASE_URL}/chargers/${chargerId}`, { headers: { Authorization: jwt } })
       .then((response) => {
         callback(response.data);
       })
