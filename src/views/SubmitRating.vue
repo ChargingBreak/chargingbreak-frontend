@@ -18,11 +18,41 @@
             </strong>
 
             <div class="btn-group">
-              <button v-on:click="saveRating(theme, 1)" class="btn btn-primary" :disabled="savedThemes.indexOf(theme) !== -1">1</button>
-              <button v-on:click="saveRating(theme, 2)" class="btn btn-primary" :disabled="savedThemes.indexOf(theme) !== -1">2</button>
-              <button v-on:click="saveRating(theme, 3)" class="btn btn-primary" :disabled="savedThemes.indexOf(theme) !== -1">3</button>
-              <button v-on:click="saveRating(theme, 4)" class="btn btn-primary" :disabled="savedThemes.indexOf(theme) !== -1">4</button>
-              <button v-on:click="saveRating(theme, 5)" class="btn btn-primary" :disabled="savedThemes.indexOf(theme) !== -1">5</button>
+              <button
+                v-on:click="saveRating(theme, 1)"
+                class="btn btn-primary"
+                :disabled="savedThemes.indexOf(theme) !== -1">
+                1
+              </button>
+
+              <button
+                v-on:click="saveRating(theme, 2)"
+                class="btn btn-primary"
+                :disabled="savedThemes.indexOf(theme) !== -1">
+                2
+              </button>
+
+              <button
+                v-on:click="saveRating(theme, 3)"
+                class="btn btn-primary"
+                :disabled="savedThemes.indexOf(theme) !== -1">
+                3
+              </button>
+
+              <button
+                v-on:click="saveRating(theme, 4)"
+                class="btn btn-primary"
+                :disabled="savedThemes.indexOf(theme) !== -1">
+                4
+              </button>
+
+              <button
+                v-on:click="saveRating(theme, 5)"
+                class="btn btn-primary"
+                :disabled="savedThemes.indexOf(theme) !== -1">
+                5
+              </button>
+
             </div>
           </div>
         </div>
@@ -43,12 +73,7 @@ export default {
     return {
       themes: ['FOOD', 'KIDS', 'RESTROOMS', 'SHOPPING', 'ATMOSPHERE'],
       savedThemes: [],
-<<<<<<< HEAD
     };
-=======
-    // eslint-disable-next-line
-    }
->>>>>>> 3d6f5fca74ca84a5abb80ca753f32b6c7e5a2b01
   },
   computed: mapState({
     user: state => state.auth.user,

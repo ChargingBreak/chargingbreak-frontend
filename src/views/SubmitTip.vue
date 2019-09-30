@@ -19,7 +19,9 @@
         </select>
       </div>
 
-      <button v-on:click="submit()" class="btn btn-primary" :disabled="!formIsValid()">Submit</button>
+      <button v-on:click="submit()" class="btn btn-primary" :disabled="!formIsValid()">
+        Submit
+      </button>
     </div>
     <div v-else>
       <router-link to="/">Please log in</router-link> before submitting a tip
@@ -50,7 +52,13 @@ export default {
     },
     submit() {
       if (this.formIsValid()) {
-        this.$store.dispatch('chargers/submitTip', { id: this.$route.params.chargerId, text: this.formText, theme: this.formTheme });
+        const parameters = {
+          id: this.$route.params.chargerId,
+          text: this.formText,
+          theme: this.formTheme,
+        };
+
+        this.$store.dispatch('chargers/submitTip', parameters);
         this.$router.push({ path: `/charger/${this.$route.params.chargerId}` });
       }
     },

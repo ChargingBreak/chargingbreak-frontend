@@ -38,24 +38,30 @@ const actions = {
   submitTip({ commit, rootState, dispatch }, parameters) {
     commit('setLoading');
 
-    charger.submitTip(rootState.auth.jwt, parameters.id, parameters.text, parameters.theme, (response, error) => {
-      if (error) {
-        commit('setError', error);
-      } else {
-        dispatch('getChargerDetails', { id: parameters.id });
-      }
-    });
+    charger.submitTip(
+      rootState.auth.jwt, parameters.id, parameters.text, parameters.theme,
+      (response, error) => {
+        if (error) {
+          commit('setError', error);
+        } else {
+          dispatch('getChargerDetails', { id: parameters.id });
+        }
+      },
+    );
   },
   submitRating({ commit, rootState, dispatch }, parameters) {
     commit('setLoading');
 
-    charger.submitRating(rootState.auth.jwt, parameters.id, parameters.rating, parameters.theme, (response, error) => {
-      if (error) {
-        commit('setError', error);
-      } else {
-        dispatch('getChargerDetails', { id: parameters.id });
-      }
-    });
+    charger.submitRating(
+      rootState.auth.jwt, parameters.id, parameters.rating, parameters.theme,
+      (response, error) => {
+        if (error) {
+          commit('setError', error);
+        } else {
+          dispatch('getChargerDetails', { id: parameters.id });
+        }
+      },
+    );
   },
 };
 
