@@ -12,18 +12,18 @@
       <div class="card bg-light stalls">
         <div class="card-body">
           <simple-svg
-            v-for="n in chargerDetails.stallCount"
+            v-for="n in chargerDetails.stall_count"
             :key="n"
             filepath="/img/symbols/supercharger.svg"
           />
-          <h2><span class="badge">{{ chargerDetails.stallCount }} stalls</span></h2>
+          <h2><span class="badge">{{ chargerDetails.stall_count }} stalls</span></h2>
         </div>
       </div>
 
       <div class="card bg-light">
         <div class="card-body text-center">
           <simple-svg filepath="/img/symbols/calendar.svg" />
-          <p class="mt-2">Opened {{ formatDuration(chargerDetails.dateOpened) }}</p>
+          <p class="mt-2">Opened {{ formatDuration(chargerDetails.date_opened) }}</p>
         </div>
       </div>
 
@@ -35,6 +35,24 @@
       </div>
     </div>
 
+    <nav class="navbar navbar-dark bg-primary mt-4 mb-2">
+      <span class="navbar-brand mb-0 h1">Nearby places</span>
+    </nav>
+
+    <div class="card-deck ratings">
+      <div
+        v-for="place in chargerDetails.places"
+        :key="place.id"
+        class="card border-light"
+      >
+        <div class="card-body px-0 py-2">
+          <h2>{{ place.spider.display_name }} {{ place.name }}</h2>
+          {{ place.opening_hours }}
+        </div>
+      </div>
+    </div>
+
+    <!--
     <nav class="navbar navbar-dark bg-primary mt-4 mb-2">
       <span class="navbar-brand mb-0 h1">Ratings</span>
       <router-link :to="'/charger/' + chargerDetails.id + '/rate'" class="btn btn-light">Submit rating</router-link>
@@ -64,7 +82,9 @@
         </div>
       </div>
     </div>
+    -->
 
+    <!--
     <nav class="navbar navbar-dark bg-primary mt-4 mb-2">
       <span class="navbar-brand mb-0 h1">Tips</span>
       <router-link :to="'/charger/' + chargerDetails.id + '/tip'" class="btn btn-light">Submit tip</router-link>
@@ -114,6 +134,7 @@
         </div>
       </div>
     </div>
+  -->
   </div>
 </template>
 
@@ -207,8 +228,8 @@ export default {
     chargerDetails: Object,
   },
   created() {
-    _.union(this.chargerDetails.tips.map(tip => tip.user_id))
-      .forEach(userId => this.$store.dispatch('users/getUser', userId));
+    //_.union(this.chargerDetails.tips.map(tip => tip.user_id))
+    //  .forEach(userId => this.$store.dispatch('users/getUser', userId));
   },
   methods: {
     formatDuration(date) {
